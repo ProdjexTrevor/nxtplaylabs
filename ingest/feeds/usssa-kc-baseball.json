@@ -1,0 +1,70 @@
+{
+  "source": {
+    "name": "USSSA Missouri Baseball",
+    "url": "https://mobaseball.usssa.com/"
+  },
+  "replacedBy": [
+    "usssa-mobaseball.json",
+    "usssa-ksbaseball.json"
+  ],
+  "tournaments": [
+    {
+      "sport": "baseball",
+      "sanction": "usssa",
+      "state": "MO",
+      "city": "Liberty",
+      "zip": "64068",
+      "organizer": "KC Sports (Garrett Fortuna)",
+      "url": "https://mobaseball.usssa.com/",
+      "name": "KC Sports Turf Wars",
+      "start": "2027-03-06",
+      "end": "2027-03-06",
+      "ages": "9U - 14U",
+      "fee": "$300",
+      "format": "One-day event"
+    },
+    {
+      "sport": "baseball",
+      "sanction": "usssa",
+      "state": "MO",
+      "city": "Liberty",
+      "zip": "64068",
+      "organizer": "KC Sports (Garrett Fortuna)",
+      "url": "https://mobaseball.usssa.com/",
+      "name": "KC Sports Early Bird Classic",
+      "start": "2027-03-12",
+      "end": "2027-03-14",
+      "ages": "9U - 14U",
+      "fee": "$420 - $600"
+    },
+    {
+      "sport": "baseball",
+      "sanction": "usssa",
+      "state": "MO",
+      "city": "Liberty",
+      "zip": "64068",
+      "organizer": "KC Sports (Garrett Fortuna)",
+      "url": "https://mobaseball.usssa.com/",
+      "name": "KC Sports Scott McGinnis Memorial",
+      "start": "2027-03-19",
+      "end": "2027-03-21",
+      "ages": "9U - 14U",
+      "fee": "$420 - $600"
+    },
+    {
+      "sport": "baseball",
+      "sanction": "usssa",
+      "state": "MO",
+      "city": "Liberty",
+      "zip": "64068",
+      "organizer": "KC Sports (Garrett Fortuna)",
+      "url": "https://mobaseball.usssa.com/",
+      "name": "MO AA State Championship",
+      "start": "2027-06-18",
+      "end": "2027-06-20",
+      "ages": "10U - 14U",
+      "fee": "$515",
+      "format": "USSSA state championship"
+    }
+  ]
+}

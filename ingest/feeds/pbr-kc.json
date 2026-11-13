@@ -1,0 +1,63 @@
+{
+  "source": {
+    "name": "Prep Baseball Tournaments",
+    "url": "https://tournaments.prepbaseballreport.com/label/kansas-city"
+  },
+  "tournaments": [
+    {
+      "sport": "baseball",
+      "sanction": "pbr",
+      "state": "KS",
+      "city": "Kansas City",
+      "zip": "66112",
+      "venue": "Homefield Baseball Complex & Creekside Baseball Park",
+      "organizer": "Prep Baseball KC",
+      "url": "https://tournaments.prepbaseballreport.com/label/kansas-city",
+      "name": "Prep Baseball KC Early Bird Bash - 2 Day",
+      "start": "2027-03-13",
+      "end": "2027-03-14"
+    },
+    {
+      "sport": "baseball",
+      "sanction": "pbr",
+      "state": "KS",
+      "city": "Kansas City",
+      "zip": "66112",
+      "venue": "Homefield Baseball Complex & Creekside Baseball Park",
+      "organizer": "Prep Baseball KC",
+      "url": "https://tournaments.prepbaseballreport.com/label/kansas-city",
+      "name": "Prep Baseball KC Classic",
+      "start": "2027-03-19",
+      "end": "2027-03-21"
+    },
+    {
+      "sport": "baseball",
+      "sanction": "pbr",
+      "state": "KS",
+      "city": "Kansas City",
+      "zip": "66112",
+      "venue": "Homefield Baseball Complex & Creekside Baseball Park",
+      "organizer": "Prep Baseball KC",
+      "url": "https://tournaments.prepbaseballreport.com/events/prep-baseball-kc-summer-championships-kansas-city-06-03-2027",
+      "name": "Prep Baseball KC Summer Championships",
+      "start": "2027-06-10",
+      "end": "2027-06-13",
+      "ages": "14U - 18U",
+      "fee": "$1,299 - $1,699",
+      "format": "4-game guarantee, invite only, metal bats"
+    },
+    {
+      "sport": "baseball",
+      "sanction": "pbr",
+      "state": "KS",
+      "city": "Kansas City",
+      "zip": "66112",
+      "venue": "Homefield Baseball Complex & Creekside Baseball Park",
+      "organizer": "Prep Baseball KC",
+      "url": "https://tournaments.prepbaseballreport.com/label/kansas-city",
+      "name": "Prep Baseball KC World Series",
+      "start": "2027-07-22",
+      "end": "2027-07-26"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "_readme": "Settings for ingest/build_tournaments.py. sports and sanctions are copied into tournaments.json as-is. While sample is true, feeds whose file name starts with _sample are included and the site shows a 'sample listings' notice; set it to false once real listings are in.",
+  "sample": false,
+  "sports": [
+    {
+      "id": "baseball",
+      "name": "Baseball"
+    },
+    {
+      "id": "softball",
+      "name": "Softball"
+    }
+  ],
+  "sanctions": [
+    {
+      "id": "usssa",
+      "name": "USSSA",
+      "fullName": "United States Specialty Sports Association",
+      "url": "https://www.usssa.com"
+    },
+    {
+      "id": "usa-softball",
+      "name": "USA Softball",
+      "fullName": "USA Softball",
+      "url": "https://www.usasoftball.com"
+    },
+    {
+      "id": "pbr",
+      "name": "PBR",
+      "fullName": "Prep Baseball (PBR Tournaments)",
+      "url": "https://www.prepbaseball.com"
+    },
+    {
+      "id": "perfect-game",
+      "name": "Perfect Game",
+      "fullName": "Perfect Game",
+      "url": "https://www.perfectgame.org"
+    },
+    {
+      "id": "top-gun-events",
+      "name": "Top Gun",
+      "fullName": "Top Gun Events",
+      "url": "https://topgunevents.com"
+    },
+    {
+      "id": "triple-crown",
+      "name": "Triple Crown",
+      "fullName": "Triple Crown Sports",
+      "url": "https://www.triplecrownsports.com"
+    }
+  ]
+}

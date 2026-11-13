@@ -1,0 +1,114 @@
+{
+  "source": {
+    "name": "USSSA Kansas City Fastpitch",
+    "url": "https://www.playusssakc.com/"
+  },
+  "replacedBy": [
+    "usssa-ksfastpitch.json",
+    "usssa-mofastpitch.json"
+  ],
+  "tournaments": [
+    {
+      "sport": "softball",
+      "sanction": "usssa",
+      "state": "KS",
+      "organizer": "USSSA KC",
+      "url": "https://www.playusssakc.com/",
+      "name": "March Maddness 5GG (All Turf)",
+      "start": "2027-03-12",
+      "end": "2027-03-14",
+      "city": "Shawnee",
+      "zip": "66216",
+      "ages": "8U - 18U",
+      "fee": "$200 - $450",
+      "format": "5-game guarantee, all turf"
+    },
+    {
+      "sport": "softball",
+      "sanction": "usssa",
+      "state": "KS",
+      "organizer": "USSSA KC",
+      "url": "https://www.playusssakc.com/",
+      "name": "Season Opener (All Turf)",
+      "start": "2027-03-19",
+      "end": "2027-03-21",
+      "city": "Shawnee",
+      "zip": "66216",
+      "ages": "8U - 18U",
+      "fee": "$200 - $415",
+      "format": "All turf"
+    },
+    {
+      "sport": "softball",
+      "sanction": "usssa",
+      "state": "KS",
+      "organizer": "USSSA KC",
+      "url": "https://www.playusssakc.com/",
+      "name": "Six in the Spring 6GG (No Consolation Games)",
+      "start": "2027-04-02",
+      "end": "2027-04-04",
+      "city": "Shawnee",
+      "zip": "66216",
+      "ages": "8U - 18U",
+      "fee": "$200 - $575",
+      "format": "6-game guarantee, no consolation games"
+    },
+    {
+      "sport": "softball",
+      "sanction": "usssa",
+      "state": "KS",
+      "organizer": "USSSA KC",
+      "url": "https://www.playusssakc.com/",
+      "name": "Rawlings Hype Tour \u2013 Kansas City \u2013 2x Elimination",
+      "start": "2027-04-09",
+      "end": "2027-04-11",
+      "city": "Shawnee",
+      "zip": "66216",
+      "ages": "8U - 18U",
+      "fee": "$200 - $475",
+      "format": "Double elimination"
+    },
+    {
+      "sport": "softball",
+      "sanction": "usssa",
+      "state": "KS",
+      "organizer": "USSSA KC",
+      "url": "https://www.playusssakc.com/",
+      "name": "Battle for the Bling",
+      "start": "2027-04-16",
+      "end": "2027-04-18",
+      "city": "Shawnee",
+      "zip": "66216",
+      "ages": "8U - 18U",
+      "fee": "$200 - $415"
+    },
+    {
+      "sport": "softball",
+      "sanction": "usssa",
+      "state": "KS",
+      "organizer": "USSSA KC",
+      "url": "https://www.playusssakc.com/",
+      "name": "Texas Roadhouse Open",
+      "start": "2027-04-23",
+      "end": "2027-04-25",
+      "city": "Shawnee",
+      "zip": "66216",
+      "ages": "8U - 18U",
+      "fee": "$200 - $415"
+    },
+    {
+      "sport": "softball",
+      "sanction": "usssa",
+      "state": "KS",
+      "organizer": "USSSA KC",
+      "url": "https://www.usaeliteselectwfc.com/",
+      "name": "2027 World Fastpitch Championships",
+      "start": "2027-07-13",
+      "end": "2027-07-17",
+      "city": "Kansas City Metro",
+      "zip": "66216",
+      "ages": "8U - 18U",
+      "fee": "$695 - $1195"
+    }
+  ]
+}

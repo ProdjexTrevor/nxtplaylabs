@@ -1,0 +1,108 @@
+# Daily tournament refresh: scrape USSSA, rebuild tournaments.json, commit if anything changed.
+# Vercel redeploys the site on the push. Run it by hand from the Actions tab ("Run workflow").
+# The first run reads every event page and takes a while (~2 s per page); later runs only
+# re-download pages that changed. The run's report is in ingest/reports/usssa-latest.json
+# (committed whenever listings change) and on the run's summary page.
+name: Tournaments daily refresh
+
+on:
+  schedule:
+    - cron: "23 9 * * *"   # 09:23 UTC = 3:23 AM Central (4:23 AM during daylight time)
+  workflow_dispatch:
+    inputs:
+      site:
+        description: "Only this USSSA site (e.g. mobaseball.usssa.com); blank = all"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tournaments-daily
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    outputs:
+      has_updates: ${{ steps.report.outputs.has_updates }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Restore page cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ingest/cache
+          key: usssa-cache-${{ github.run_id }}
+          restore-keys: usssa-cache-
+
+      - name: Scrape USSSA
+        id: scrape
+        env:
+          SITE: ${{ inputs.site }}
+        run: |
+          set +e
+          if [ -n "$SITE" ]; then
+            python3 ingest/scrapers/usssa.py --site "$SITE"
+          else
+            python3 ingest/scrapers/usssa.py
+          fi
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Save page cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ingest/cache
+          key: usssa-cache-${{ github.run_id }}
+
+      - name: Rebuild tournaments.json
+        run: python3 ingest/build_tournaments.py
+
+      - name: Report
+        id: report
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          r = json.load(open("ingest/reports/usssa-latest.json"))
+          s = r["summary"]
+          print(f"### Tournaments refresh\n\n{s['new']} new · {s['changed']} changed · {s['removed']} removed · "
+                f"{s['sites_ok']} sites ok · {s['sites_failed']} failed · {s['requests']} requests\n")
+          print("| Site | Status | Kept | New | Changed | Removed | Fetched | Unchanged | Errors |\n|---|---|---|---|---|---|---|---|---|")
+          for host, x in r["sites"].items():
+              print(f"| {host} | {x.get('status')} | {x.get('kept','')} | {x.get('new','')} | {x.get('changed','')} | "
+                    f"{x.get('removed','')} | {x.get('fetched','')} | {x.get('not_modified','')} | {x.get('errors', x.get('error',''))} |")
+          EOF
+          echo "has_updates=$(python3 -c "import json;print(str(json.load(open('ingest/reports/usssa-latest.json'))['summary']['has_updates']).lower())")" >> "$GITHUB_OUTPUT"
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- tournaments.json ingest/feeds; then
+            echo "No listing changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tournaments.json ingest/feeds ingest/reports/usssa-latest.json
+          git commit -m "Daily tournament refresh $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: usssa-report
+          path: ingest/reports/usssa-latest.json
+          if-no-files-found: ignore
+
+      - name: Fail if every site failed
+        if: steps.scrape.outputs.exit_code == '2'
+        run: |
+          echo "::error::Every USSSA site failed; listings were left unchanged. See the log above."
+          exit 1
