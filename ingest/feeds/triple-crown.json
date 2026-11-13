@@ -1,0 +1,23 @@
+{
+  "source": {
+    "name": "Triple Crown Fastpitch",
+    "url": "https://www.triplecrownfastpitch.com/"
+  },
+  "tournaments": [
+    {
+      "name": "Triple Crown Midwest Summer Nationals",
+      "sport": "softball",
+      "sanction": "triple-crown",
+      "start": "2027-07-19",
+      "end": "2027-07-24",
+      "city": "Kansas City",
+      "state": "KS",
+      "zip": "66101",
+      "ages": "10U - 18U",
+      "fee": "$750 - $1750",
+      "format": "6-game guarantee (4 pool games, double-elimination bracket)",
+      "organizer": "Triple Crown Sports",
+      "url": "https://www.triplecrownfastpitch.com/events/midwest-summer-nationals"
+    }
+  ]
+}

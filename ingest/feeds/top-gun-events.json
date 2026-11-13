@@ -1,0 +1,112 @@
+{
+  "source": {
+    "name": "Top Gun Events",
+    "url": "https://topgunevents.com/"
+  },
+  "tournaments": [
+    {
+      "sport": "softball",
+      "sanction": "top-gun-events",
+      "state": "KS",
+      "organizer": "Top Gun Events",
+      "name": "2027 Top Gun Elite 20 Spring Invite",
+      "start": "2027-04-09",
+      "end": "2027-04-11",
+      "city": "Overland Park",
+      "zip": "66212",
+      "ages": "16U, 18U",
+      "fee": 850,
+      "format": "Application only",
+      "url": "https://app.tagup.com/softball/event/tournament/725/"
+    },
+    {
+      "sport": "softball",
+      "sanction": "top-gun-events",
+      "state": "KS",
+      "organizer": "Top Gun Events",
+      "name": "2027 Top Gun Kansas Futures Spring Invite",
+      "start": "2027-04-23",
+      "end": "2027-04-25",
+      "city": "Shawnee",
+      "zip": "66216",
+      "ages": "10U, 11U, 12U, 13U, 14U",
+      "format": "Application only",
+      "url": "https://app.tagup.com/softball/event/tournament/737/"
+    },
+    {
+      "sport": "softball",
+      "sanction": "top-gun-events",
+      "state": "KS",
+      "organizer": "Top Gun Events",
+      "name": "2027 Heartland Invite powered by Top Gun Events",
+      "start": "2027-04-30",
+      "end": "2027-05-02",
+      "city": "Overland Park",
+      "zip": "66212",
+      "ages": "12U, 14U, 16U, 18U",
+      "format": "Application only",
+      "url": "https://app.tagup.com/softball/event/tournament/730/"
+    },
+    {
+      "sport": "softball",
+      "sanction": "top-gun-events",
+      "state": "KS",
+      "organizer": "Top Gun Events",
+      "name": "2027 Top Gun Ranger",
+      "start": "2027-05-14",
+      "end": "2027-05-16",
+      "city": "Overland Park",
+      "zip": "66212",
+      "ages": "12U, 14U, 16U, 18U",
+      "format": "Application only",
+      "url": "https://app.tagup.com/softball/event/tournament/746/"
+    },
+    {
+      "sport": "softball",
+      "sanction": "top-gun-events",
+      "state": "KS",
+      "organizer": "Top Gun Events",
+      "name": "2027 Heartland College Showcase powered by Top Gun Events",
+      "start": "2027-06-04",
+      "end": "2027-06-06",
+      "city": "Overland Park",
+      "zip": "66212",
+      "ages": "12U, 14U, 16U, 18U",
+      "fee": 1250,
+      "format": "Application only, college showcase",
+      "url": "https://app.tagup.com/softball/event/tournament/741/"
+    },
+    {
+      "sport": "softball",
+      "sanction": "top-gun-events",
+      "state": "KS",
+      "organizer": "Top Gun Events",
+      "name": "2027 Top Gun Invitational",
+      "start": "2027-06-12",
+      "end": "2027-06-15",
+      "venue": "Mid America Sports Complex (plus 5 other KC-area complexes)",
+      "address": "20000 Johnson Dr",
+      "city": "Shawnee",
+      "zip": "66218",
+      "ages": "12U, 14U, 16U, 18U",
+      "fee": "$995 - $1,950",
+      "format": "6-game guarantee, application only",
+      "url": "https://app.tagup.com/softball/event/tournament/685/"
+    },
+    {
+      "sport": "softball",
+      "sanction": "top-gun-events",
+      "state": "KS",
+      "organizer": "Top Gun Events",
+      "name": "2027 Heartland World Series powered by Top Gun Events",
+      "start": "2027-07-08",
+      "end": "2027-07-11",
+      "city": "Overland Park",
+      "zip": "66212",
+      "ages": "10U, 12U, 14U, 16U, 18U",
+      "fee": 1150,
+      "format": "Application only",
+      "url": "https://app.tagup.com/softball/event/tournament/731/"
+    }
+  ]
+}
