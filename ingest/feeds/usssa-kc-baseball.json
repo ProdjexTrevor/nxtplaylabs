@@ -3,6 +3,10 @@
     "name": "USSSA Missouri Baseball",
     "url": "https://mobaseball.usssa.com/"
   },
+  "replacedBy": [
+    "usssa-mobaseball.json",
+    "usssa-ksbaseball.json"
+  ],
   "tournaments": [
     {
       "sport": "baseball",

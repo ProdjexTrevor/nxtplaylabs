@@ -3,6 +3,10 @@
     "name": "USSSA Kansas City Fastpitch",
     "url": "https://www.playusssakc.com/"
   },
+  "replacedBy": [
+    "usssa-ksfastpitch.json",
+    "usssa-mofastpitch.json"
+  ],
   "tournaments": [
     {
       "sport": "softball",

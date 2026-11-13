@@ -257,6 +257,15 @@ def main():
         if path.suffix not in (".json", ".csv"):
             continue
         source, rows = read_feed(path)
+        # A hand-made feed can name the automated feeds that supersede it ("replacedBy"); once any of
+        # those has events, the hand-made one is skipped so the same tournaments aren't listed twice.
+        if path.suffix == ".json":
+            meta = json.loads(path.read_text(encoding="utf-8"))
+            repl = meta.get("replacedBy", []) if isinstance(meta, dict) else []
+            live = [n for n in repl if (FEEDS / n).exists() and read_feed(FEEDS / n)[1]]
+            if live:
+                print(f"  {path.name}: skipped (replaced by {', '.join(live)})")
+                continue
         counts[path.name] = 0
         for i, r in enumerate(rows, 1):
             where = f"{path.name} #{i}"

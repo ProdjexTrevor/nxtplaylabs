@@ -1,0 +1,15 @@
+{
+  "_readme": "Settings for ingest/scrapers/usssa.py. Each site is a USSSA state/sport site (e.g. ksfastpitch.usssa.com). Only events whose ballpark ZIP is within radius_miles of center_zip are kept. Be polite: keep delay_seconds at 2 or more. Add a site to cover a new state or sport.",
+  "center_zip": "64106",
+  "radius_miles": 75,
+  "delay_seconds": 2,
+  "max_list_pages": 40,
+  "max_event_fetches": 1500,
+  "user_agent": "NXTPlayLabsTournamentBot/1.0 (+https://nxtplaylabs.com/tournaments; support@nxtplaylabs.com)",
+  "sites": [
+    {"host": "ksfastpitch.usssa.com", "sport": "softball", "label": "USSSA Kansas Fastpitch"},
+    {"host": "ksbaseball.usssa.com", "sport": "baseball", "label": "USSSA Kansas Baseball"},
+    {"host": "mofastpitch.usssa.com", "sport": "softball", "label": "USSSA Missouri Fastpitch"},
+    {"host": "mobaseball.usssa.com", "sport": "baseball", "label": "USSSA Missouri Baseball"}
+  ]
+}
