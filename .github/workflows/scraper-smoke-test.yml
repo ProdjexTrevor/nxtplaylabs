@@ -24,9 +24,9 @@ jobs:
           python-version: "3.12"
       - name: Offline tests
         run: python3 ingest/scrapers/tests/test_usssa.py
-      - name: Fetch 5 live tournaments (Missouri baseball, then Kansas fastpitch)
+      - name: Fetch 5 live tournaments (all four KS/MO USSSA sites)
         run: |
-          python3 ingest/scrapers/usssa.py --site mobaseball.usssa.com --site ksfastpitch.usssa.com --limit 5 --out smoke
+          python3 ingest/scrapers/usssa.py --site mofastpitch.usssa.com --site mobaseball.usssa.com --site ksfastpitch.usssa.com --site ksbaseball.usssa.com --limit 5 --out smoke
           echo '### Live smoke test' >> "$GITHUB_STEP_SUMMARY"
           python3 - <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
           import glob, json
