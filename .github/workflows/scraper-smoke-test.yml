@@ -1,0 +1,45 @@
+# Live smoke test for the USSSA scraper: whenever the scraper changes (or on demand), fetch a
+# handful of real tournaments from the live USSSA sites. Writes nothing to the repo; the parsed
+# events and report are attached to the run as the "scraper-smoke" artifact.
+name: Scraper smoke test
+
+on:
+  pull_request:
+    paths:
+      - "ingest/scrapers/**"
+      - ".github/workflows/scraper-smoke-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Offline tests
+        run: python3 ingest/scrapers/tests/test_usssa.py
+      - name: Fetch 5 live tournaments (Missouri baseball, then Kansas fastpitch)
+        run: |
+          python3 ingest/scrapers/usssa.py --site mobaseball.usssa.com --site ksfastpitch.usssa.com --limit 5 --out smoke
+          echo '### Live smoke test' >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
+          import glob, json
+          rows = [t for f in sorted(glob.glob("smoke/usssa-*.json")) for t in json.load(open(f))["tournaments"]]
+          print(f"\n{len(rows)} tournaments parsed\n\n| Name | Dates | Where | ZIP | Ages | Fee | Format | Link |\n|---|---|---|---|---|---|---|---|")
+          for t in rows:
+              print(f"| {t.get('name')} | {t.get('start')} → {t.get('end')} | {t.get('venue','')} {t.get('city','')}, {t.get('state','')} | "
+                    f"{t.get('zip','')} | {t.get('ages','')} | {t.get('fee','')} | {t.get('format','')} | {t.get('source',{}).get('url','')} |")
+          r = json.load(open("smoke/usssa-latest.json"))
+          print("\n```\n" + json.dumps({h: {k: v for k, v in x.items() if k != 'changes'} for h, x in r['sites'].items()}, indent=1) + "\n```")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scraper-smoke
+          path: smoke/

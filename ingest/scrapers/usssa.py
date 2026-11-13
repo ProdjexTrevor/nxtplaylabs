@@ -324,7 +324,7 @@ def site_slug(host):
     return host.split(".")[0]
 
 
-def run_site(site, cfg, f, geo, center, today, base_override, log):
+def run_site(site, cfg, f, geo, center, today, base_override, log, limit=None):
     host = site["host"]
     base = base_override.rstrip("/") + "/" + host if base_override else f"https://{host}"
     cache_dir = CACHE / site_slug(host)
@@ -358,6 +358,9 @@ def run_site(site, cfg, f, geo, center, today, base_override, log):
     records = []
     budget = int(cfg.get("max_event_fetches", 1500))
     for slug, url in links:
+        if limit and len(records) >= limit:
+            log(f"  stopping at --limit {limit}")
+            break
         stats["event_pages"] += 1
         cpath = cache_dir / (re.sub(r"[^a-z0-9._-]", "_", slug)[:120] + ".json")
         cached = json.loads(cpath.read_text()) if cpath.exists() else None
@@ -442,6 +445,8 @@ def main():
     ap.add_argument("--base-url", help="fetch from a local mirror instead of https://<host> (testing)")
     ap.add_argument("--today", help="YYYY-MM-DD (testing)")
     ap.add_argument("--delay", type=float, help="override delay_seconds (testing)")
+    ap.add_argument("--limit", type=int, help="stop after this many kept events in total (smoke test)")
+    ap.add_argument("--out", help="write feeds and report to this folder instead of ingest/feeds + ingest/reports")
     args = ap.parse_args()
 
     cfg = json.loads(CONFIG.read_text())
@@ -461,14 +466,20 @@ def main():
     sites = [s for s in cfg["sites"] if not args.site or s["host"] in args.site]
     report = {"ran_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
               "center_zip": cfg["center_zip"], "radius_miles": cfg["radius_miles"], "sites": {}}
-    failures = 0
+    feeds_dir = pathlib.Path(args.out) if args.out else FEEDS
+    reports_dir = pathlib.Path(args.out) if args.out else REPORTS
+    feeds_dir.mkdir(parents=True, exist_ok=True)
+    failures, total = 0, 0
     for site in sites:
+        if args.limit and total >= args.limit:
+            break
         host = site["host"]
         log(f"{host}")
-        feed_path = FEEDS / f"usssa-{site_slug(host)}.json"
+        feed_path = feeds_dir / f"usssa-{site_slug(host)}.json"
         old = json.loads(feed_path.read_text()).get("tournaments", []) if feed_path.exists() else []
         try:
-            records, stats = run_site(site, cfg, f, geo, center, today, args.base_url, log)
+            records, stats = run_site(site, cfg, f, geo, center, today, args.base_url, log,
+                                      (args.limit - total) if args.limit else None)
         except Exception as e:
             failures += 1
             log(f"  FAILED: {e}; keeping the previous feed")
@@ -477,6 +488,7 @@ def main():
         if records is None:
             report["sites"][host] = {"status": "skipped", **stats}
             continue
+        total += len(records)
         changes = diff(old, records)
         feed_path.write_text(json.dumps({
             "source": {"name": site.get("label") or host, "url": f"https://{host}/events/"},
@@ -496,11 +508,11 @@ def main():
         "new": sum(s["new"] for s in ok), "changed": sum(s["changed"] for s in ok), "removed": sum(s["removed"] for s in ok),
         "has_updates": any(s["new"] or s["changed"] or s["removed"] for s in ok),
     }
-    REPORTS.mkdir(parents=True, exist_ok=True)
-    (REPORTS / "usssa-latest.json").write_text(json.dumps(report, indent=2) + "\n")
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    (reports_dir / "usssa-latest.json").write_text(json.dumps(report, indent=2) + "\n")
     s = report["summary"]
     log(f"done: {s['sites_ok']} sites ok, {s['sites_failed']} failed · {s['new']} new, {s['changed']} changed, "
-        f"{s['removed']} removed · {s['requests']} requests · report: ingest/reports/usssa-latest.json")
+        f"{s['removed']} removed · {s['requests']} requests · report: {reports_dir / 'usssa-latest.json'}")
     return 2 if sites and failures == len(sites) else 0
 
 
